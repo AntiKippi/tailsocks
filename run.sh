@@ -7,7 +7,7 @@ HOST=127.0.0.1
 PORT=8888
 HOSTNAME="$CNT_NAME"
 BACKGROUND=""
-REBUILD=0
+BUILD=0
 
 # cd into the directory the script lives
 cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit 1
@@ -22,21 +22,29 @@ usage() {
     exit 1
 }
 
+# Parse the command line arguments
 while getopts "h:p:n:db" opt; do
   case "${opt}" in
     h) HOST="$OPTARG" ;;
     p) PORT="$OPTARG" ;;
     n) HOSTNAME="$OPTARG" ;;
     d) BACKGROUND="d" ;;
-    b) REBUILD=1 ;;
+    b) BUILD=1 ;;
     *) usage ;;
   esac
 done
 
-if [ "$REBUILD" != "0" ]; then
+# Always build the container if it has not been build before
+if [ -z "$(docker images -q "$CNT_NAME" 1>&2 2> /dev/null)" ]; then
+  BUILD=1
+fi
+
+# (Re)build the container if necessary
+if [ "$BUILD" != "0" ]; then
   docker build -t "$CNT_NAME" .
 fi
 
+# Run the container
 docker run "-ti$BACKGROUND" \
    --mount type=bind,source="$(realpath .)/statedir",target=/var/lib/tailscale/ \
    --hostname="$HOSTNAME" \
