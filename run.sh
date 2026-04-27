@@ -10,7 +10,7 @@ BACKGROUND=""
 REBUILD=0
 
 # cd into the directory the script lives
-cd "$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )" || exit 1
+cd -- "$(dirname "$0")" >/dev/null 2>&1 || exit 1
 
 usage() {
   echo "Usage: $(basename "$0") [-h <host>] [-p <port>] [-n <hostname>] [-d] [-b]
