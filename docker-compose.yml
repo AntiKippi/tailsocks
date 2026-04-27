@@ -1,0 +1,18 @@
+services:
+  tailsocks:
+    build: .
+    image: tailsocks
+    hostname: tailsocks
+    stdin_open: true
+    tty: true
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    sysctls:
+      net.ipv4.conf.all.rp_filter: 2
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - ./statedir:/var/lib/tailscale/
+    ports:
+      - "127.0.0.1:8888:1080"
