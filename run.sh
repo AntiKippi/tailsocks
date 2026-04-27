@@ -3,7 +3,7 @@
 set -e
 
 CNT_NAME="tailsocks"
-HOST=127.0.0.1
+HOST="127.0.0.1"
 PORT=8888
 HOSTNAME="$CNT_NAME"
 BACKGROUND=""
@@ -35,7 +35,7 @@ while getopts "h:p:n:db" opt; do
 done
 
 # Always build the container if it has not been build before
-if [ -z "$(docker images -q "$CNT_NAME" 1>&2 2> /dev/null)" ]; then
+if [ -z "$(docker images -q "$CNT_NAME" 2> /dev/null)" ]; then
   BUILD=1
 fi
 
@@ -45,7 +45,7 @@ if [ "$BUILD" != "0" ]; then
 fi
 
 # Run the container
-docker run "-ti$BACKGROUND" \
+docker run "-it$BACKGROUND" \
    --mount type=bind,source="$(realpath .)/statedir",target=/var/lib/tailscale/ \
    --hostname="$HOSTNAME" \
    --cap-add=NET_ADMIN \
