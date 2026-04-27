@@ -2,7 +2,7 @@ services:
   tailsocks:
     build: .
     image: tailsocks
-    hostname: tailsocks
+    hostname: ${HOSTNAME:-tailsocks}
     stdin_open: true
     tty: true
     cap_add:
