@@ -15,4 +15,4 @@ services:
     volumes:
       - ./statedir:/var/lib/tailscale/
     ports:
-      - "127.0.0.1:8888:1080"
+      - "${HOST:-127.0.0.1}:${PORT:-8888}:1080"
