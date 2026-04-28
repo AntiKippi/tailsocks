@@ -30,7 +30,7 @@ $ docker compose exec tailsocks sh
 ### Customization
 You can customize several parameters, such as the proxy host and port, the container hostname, and whether the container should start interactively. See `./run.sh --help` for more information.
 
-When using Docker Compose, you can configure the proxy host, port, and container hostname using the `HOST`, `PORT`, and `HOSTNAME` environment variables, respectively.
+When using Docker Compose, you can configure the proxy host, port, and container hostname using the `TS_HOST`, `TS_PORT`, and `TS_HOSTNAME` environment variables, respectively.
 
 To configure the SOCKS server (e.g. to add authentication) please just modify the `microsocks` command-line arguments in `entry.sh`. Refer to `microsocks --help` for available options.
 
