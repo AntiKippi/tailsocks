@@ -2,7 +2,7 @@
 
 set -e
 
-CNT_NAME="AntiKippi/tailsocks"
+CNT_NAME="tailsocks"
 HOST="127.0.0.1"
 PORT=8888
 HOSTNAME="$CNT_NAME"
