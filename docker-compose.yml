@@ -2,7 +2,7 @@ services:
   tailsocks:
     build: .
     image: tailsocks
-    hostname: ${HOSTNAME:-tailsocks}
+    hostname: ${TS_HOSTNAME:-tailsocks}
     stdin_open: true
     tty: true
     cap_add:
@@ -15,4 +15,4 @@ services:
     volumes:
       - ./statedir:/var/lib/tailscale/
     ports:
-      - "${HOST:-127.0.0.1}:${PORT:-8888}:1080"
+      - "${TS_HOST:-127.0.0.1}:${TS_PORT:-8888}:1080"
